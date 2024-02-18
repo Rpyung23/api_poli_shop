@@ -1,0 +1,74 @@
+use db_polishop;
+CREATE TABLE USERS(
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(180) NOT NULL UNIQUE,
+    name VARCHAR(90)NOT NULL,
+    lastname VARCHAR(90)NOT NULL,
+    phone VARCHAR(90)NOT NULL,
+    image VARCHAR(255) NULL,
+    password VARCHAR(90) NOT NULL,
+    created_at timestamp(0) NOT NULL,
+    updated_at timestamp(0) not null
+);
+
+/*
+ALTER TABLE USERS
+ADD COLUMN UPDATED_AT timestamp(0) NOT NULL
+*/
+/*
+ALTER TABLE USERS
+CHANGE CREATED_AT created_at timestamp(0) NOT NULL
+*/
+use db_polishop;
+select * from users
+
+CREATE TABLE roles(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(90) NOT NULL UNIQUE,
+    image VARCHAR(255) NULL ,
+    route VARCHAR(180) NOT NULL,
+    created_at TIMESTAMP(0) NOT NULL,
+    updated_at TIMESTAMP(0) not null
+);
+
+INSERT INTO roles(name, route, created_at, updated_at)
+VALUES ('ASOCIACION', '/aso/orders/list','2024-01-07','2024-01-07');
+
+INSERT INTO roles(name, route, created_at, updated_at)
+VALUES ('REPARTIDOR', '/delivery/orders/list','2024-01-07','2024-01-07');
+
+INSERT INTO roles(name, route, created_at, updated_at)
+VALUES ('CLIENTE', '/client/products/list','2024-01-07','2024-01-07');
+
+CREATE TABLE user_has_roles(
+    id_user BIGINT NOT NULL,
+    id_rol BIGINT NOT NULL,
+    created_at TIMESTAMP(0) NOT NULL,
+    updated_at TIMESTAMP(0) not null,
+    FOREIGN KEY (id_user) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (id_rol) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    PRIMARY KEY (id_user,  id_rol)
+);
+
+
+CREATE TABLE categories(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(180) NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP(0) NOT NULL,
+    updated_at TIMESTAMP(0) NOT NULL
+);
+//TABLA PRODUCTOS -> CASCADE HACE QUE SI ELIMINO UNA CATEGORIA SE ELIMINEN TODOS LOS PRODUCTOS RELACIONADOS
+CREATE TABLE products(
+    id bigint primary key auto_increment,
+    name varchar(180) not null unique,
+    description text not null,
+    price decimal not null,
+    image1 varchar(255) null,
+    image2 varchar(255) null,
+    image3 varchar(255) null,
+    id_category bigint not null,
+    created_at timestamp(0) not null,
+    updated_at timestamp(0) not null,
+    foreign key (id_category) references categories(id) on update cascade on delete cascade
+);

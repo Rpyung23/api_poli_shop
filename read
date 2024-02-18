@@ -1,0 +1,73 @@
+-Conexion a la BD-
+instalar el paquete: npm i mysql2
+
+-Crear el paquete config
+Se instancian y se llenan datos de la bd
+  *se crea una funcion que permita mostrar mensajes de exito o error en la conexion de la bd
+
+-Creamos un paquete modelo
+Se crea el model de usuario: sentencias sql para insertar datos en el usuario
+Se usa una funcion que nos indica si hay un error o si se registro el usuario registrado
+
+-Creamos un nuevo paquete llamado controller
+#usar una convencion: Camell case
+se crean lo metodos con los que voy crear un usuario
+#create conde validamos la creacion del usuario
+
+-Creamos un nuevo paquete rutas
+creamos las rutas que disparen la accion: crear
+
+
+//Para la encriptacion de contraseñas debemos instalar el paquete npm i bcryptjs
+
+//Para hacer un login empleando un webtoken npm i passport y npm i passport-jwt y npm i jsonwebtoken
+
+//creamos un archivo keys -> vamos a generar un codigo secreto que nos servira como llave de conexion
+
+//Creamos un archivo llamado passport.js -> aqui vamos a realizar todas las configuraciones
+
+    en user.js vamos acrear la sentencia sql findById -> consulta select
+    db.query para ejecutar la sentencia sql
+
+    en passport.js creamos el modulo exports
+        creamos una variable que contenga la clave secreta
+
+        creamos la funcion passport.use donde nos va a devolver el usuario que estamos buscando
+
+    en userControllers.js creamos un nuevo metodo llamado login -> pedimos los capos login y password
+        en users.js creamos otra funcion findByEmail
+
+    en sever.js
+        creamos una constante con los reuire necesarios
+        app.use(passport.ini...)
+        app.use(passport.session)
+
+        require...(passport)
+    en userRoutes.js creamos una nueva ruta para el login
+
+    configurar la version de passport (revisar las mejoras de este paquete)
+
+    importante:  revisar donde hay que cambiarle a user[0] <- sale porque unicamente queremos un usuario no todo el arreglo
+
+//SUBIR IMAGENES CON FIRE-BASE
+    Creamos el directorio utils
+    Insertamos los archivos async y cloud storage
+    Intalamos los pagetes:
+        npm i @google-cloud/storage
+        npm i multer -> sirve de conexion entre el aplicativo y firebase
+
+    Dentro de la acrpeta config creamos un archivo env.js
+
+    Se requiere un archivo proporcionado por firebase - en configuracion del proyecto / Cuentas de servicio / NodeJS
+        El archivo se lo copia a la raiz y se lo renombra serviceAccountKey.json
+    Revisar configuracion del could_storage y que sean las mismas de firebase... en mombre del pyecto y el link de almacenamiento
+    Se añadieron variables necesarias en Server y se configuró el método upload -> en server.js
+
+//PARA DAR ROLES DE USUARIO...
+creamos el archvo rol.js en el paquete models
+
+hacemos modificacion en users.js en las consultas
+
+
+
+
