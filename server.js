@@ -13,7 +13,7 @@ const categoriesRoutes = require('./routes/categoryRoutes');
 const productsRoutes = require('./routes/productRoutes');
 //------//
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8592;
 
 
 app.use(logger('dev'));
